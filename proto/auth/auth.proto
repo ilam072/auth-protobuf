@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/ilam072/auth-protobuf/proto/auth;authv1";
+
+service Auth {
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc SetAdmin (SetAdminRequest) returns (google.protobuf.Empty);
+  rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+  rpc GetPublicKey (google.protobuf.Empty) returns (GetPublicKeyResponse);
+}
+
+// Register
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterResponse {
+  int64 user_id = 1;
+}
+
+// Login
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+// SetAdmin
+message SetAdminRequest {
+  int64 user_id = 1;
+}
+
+// IsAdmin
+message IsAdminRequest {
+  int64 user_id = 1;
+}
+
+message IsAdminResponse {
+  bool is_admin = 1;
+}
+
+// GetPublicKey
+message GetPublicKeyResponse {
+  string public_key = 1;
+}
+
